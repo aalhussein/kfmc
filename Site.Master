@@ -1,0 +1,137 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="kfmc.SiteMaster" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+     <title> KFMC</title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    
+<%--    /* if I want to enable RitchText in every page that has note , I need to uncomment  this section so all pages used richText
+    // but I need to put ValidateRequest="false"   at top of each page to avoide error when using this ritch text
+    // alternatively, I put this code in each page I want to use the RitchText */--%>
+<%--    <script type="text/javascript" src="../Scripts/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript" lang="javascript">
+        tinyMCE.init({
+            // General options
+
+            mode: "textareas",
+            theme: "advanced",
+            plugins: "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups",
+        });
+    </script>--%>
+</head>
+<body>
+<form runat="server" id="form1">
+<asp:ScriptManager runat="server"></asp:ScriptManager>
+<div class="page">
+    <div class="header">
+        <div class="title">
+            <asp:Image ID="ImageLogo" runat="server" ImageUrl="~/images/logoWebAppDev70.jpg" />
+            <%--  <h3>Application Training Department</h3>--%>
+        </div>
+        <div class="loginDisplay">
+            <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                <AnonymousTemplate>
+                    <a href="~/Account/Login.aspx" id="HeadLoginStatus" runat="server">Log In</a>
+                </AnonymousTemplate>
+                <LoggedInTemplate>
+                    Welcome <span class="bold">
+                        <asp:LoginName ID="HeadLoginName" runat="server" />
+                    </span>!
+              <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect"
+                          LogoutText="Log Out" LogoutPageUrl="~/index.aspx?logOut=1" />
+                </LoggedInTemplate>
+            </asp:LoginView>
+        </div>
+        <div class="clear hideSkiplink">
+            <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
+                IncludeStyleBlock="false" Orientation="Horizontal"
+                OnMenuItemClick="NavigationMenu_MenuItemClick">
+                <Items>
+                    <asp:MenuItem NavigateUrl="~/index.aspx" Text="Home" />
+                    <asp:MenuItem Text="About Us">
+                        <asp:MenuItem NavigateUrl="~/services.aspx" Text="Services" Value="" />
+                        <asp:MenuItem NavigateUrl="~/contactUs.aspx" Text="Contact Us " Value="" />
+                    </asp:MenuItem>
+           
+                    <asp:MenuItem Text="Admin" NavigateUrl="~/demo/testMaxConPool.aspx" Value="">
+                        <asp:MenuItem NavigateUrl="~/admin/default.aspx" Text="Admin Dashboard" Value="" />
+                        <asp:MenuItem NavigateUrl="~/admin/ChangePassword.aspx" Text="ChangePassword" Value="" />
+                        <asp:MenuItem NavigateUrl="~/admin/mySql.aspx" Text="Sql Query" Value="" />
+                        <asp:MenuItem NavigateUrl="~/admin/passwordRecovery.aspx" Text="Password Recovery" Value="" />
+                        <asp:MenuItem NavigateUrl="~/admin/postmaster.aspx" Text="Post Master" Value="" />
+                        <asp:MenuItem NavigateUrl="~/admin/register.aspx" Text="Register New User" Value="" />
+                        <asp:MenuItem NavigateUrl="~/admin/showRoles.aspx" Text=" Role Management" Value="" />
+                    </asp:MenuItem>
+
+                    <asp:MenuItem Text="Manager">
+                        <%--                                <asp:MenuItem NavigateUrl="~/manager/bonus.aspx" Text="Employee bonus" Value="" />
+                <asp:MenuItem NavigateUrl="~/manager/employeeBenefit.aspx" Text="Employee Benefits" Value="" />--%>
+                        <asp:MenuItem NavigateUrl="~/manager/task.aspx" Text="Employee Task" Value="" />
+                        <asp:MenuItem NavigateUrl="~/office/docMgt.aspx" Text="Doc Mgt" Value="" />
+                        <asp:MenuItem NavigateUrl="~/manager/bonus.aspx" Text="Employee Bonus" Value="" />
+                        <asp:MenuItem NavigateUrl="~/manager/employeeDepartmentDistribution.aspx" Text="Employee Department Distribution" Value="" />
+                    </asp:MenuItem>
+
+                    <asp:MenuItem Text="Employee">
+                        <asp:MenuItem NavigateUrl="~/employee/employeeDirectory.aspx" Text="Employee Directory" Value="" />
+                        <asp:MenuItem NavigateUrl="~/employee/contactDirectory.aspx" Text="Contact Directory" Value="" />
+                        <asp:MenuItem NavigateUrl="~/employee/docMgt.aspx" Text="docMgt" Value="" />
+                        <asp:MenuItem NavigateUrl="~/employee/activityRegistration.aspx" Text="Employee Activity Registration" Value="" />
+                        <asp:MenuItem NavigateUrl="~/employee/empTraining.aspx" Text="Employee Training" Value="" />
+                        <asp:MenuItem NavigateUrl="~/employee/trainingRegistration.aspx" Text="Training Registration" Value="" />    
+
+                    </asp:MenuItem>
+
+                    <asp:MenuItem Text="Internship Training Program">
+                        <%--                                 <asp:MenuItem NavigateUrl="~/internship/internEnroll.aspx" Text="Internship Registration" Value="" />
+                <asp:MenuItem NavigateUrl="~/trainee/traineeRegistration.aspx" Text="Volunteer Registration" Value="" />--%>
+                        <asp:MenuItem NavigateUrl="~/internship/internProfile.aspx" Text="Intern Registration &  Profile" Value="" />
+                        <asp:MenuItem NavigateUrl="~/internship/internAttendance.aspx" Text="Intern Attendance " Value="" />
+                        <asp:MenuItem NavigateUrl="~/internship/internTrainingSchedule.aspx" Text="Intern Training Schedule " Value="" />
+<%--                                <asp:MenuItem NavigateUrl="~/demo/internAdvisor.aspx" Text="Intern Advisors" Value="" />
+                <asp:MenuItem NavigateUrl="~/internship/InstitutionAdvisor.aspx" Text="Institution Advisors" Value="" />--%>
+                        <asp:MenuItem NavigateUrl="~/internship/trainingResources.aspx" Text="Training Resources " Value="" />
+
+                    </asp:MenuItem>
+
+                    <asp:MenuItem Text="Finance">
+                        <asp:MenuItem NavigateUrl="~/finance/default.aspx" Text="Financials" Value="" />
+                        <asp:MenuItem NavigateUrl="~/support/supportLog.aspx" Text="Support" Value="" />
+                    </asp:MenuItem>
+
+                    <asp:MenuItem Text="Marketing">
+                        <asp:MenuItem NavigateUrl="~/marketing/default.aspx" Text="Marketing" Value="" />
+                    </asp:MenuItem>
+
+<%--                    <asp:MenuItem Text="Demo">
+                        <asp:MenuItem NavigateUrl="~/demo/default.aspx" Text="Directory" Value="" />
+                        <asp:MenuItem NavigateUrl="~/demo/myJavaScript.html" Text="JavaScript" Value="" />
+                        <asp:MenuItem NavigateUrl="~/demo/myPopUp.aspx" Text="PopUp" Value="" />
+                    </asp:MenuItem>--%>
+
+                    <asp:MenuItem Text="User Profile">
+                        <asp:MenuItem NavigateUrl="~/account/userProfile.aspx" Text="Change Password" Value="" />
+                    </asp:MenuItem>
+                </Items>
+            </asp:Menu>
+            <%--     This works with security --%>
+            <%--        <asp:Menu runat="server" ID="Menu1" Orientation="Horizontal" 
+DataSourceID="siteMapDataSource" /> 
+<asp:SiteMapDataSource runat="server" ID="siteMapDataSource" ShowStartingNode="false" />--%>
+        </div>
+    </div>
+    <div class="main">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <div class="clear">
+    </div>
+
+
+    <div class="footer">
+        <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+    </div>
+</div>
+</form>
+</body>
+</html>
